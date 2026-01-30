@@ -19,15 +19,15 @@ export const heroImages = [
 
 	{
 		src: '/images/frontpage/cambridge.webp',
-		caption: 'Cambridge, UK',
+		caption: 'Trinity College, Cambridge, UK',
 	},
 	{
 		src: '/images/frontpage/dubrovnik.webp',
-		caption: 'Sea view, Dubrovnik, Croatia',
+		caption: 'Old Town, Dubrovnik, Croatia',
 	},
 	{
 		src: '/images/frontpage/lefkada-sunset.webp',
-		caption: 'Lefkada Sunset, Lefkada, Greece',
+		caption: 'Sunset, Lefkada, Greece',
 	},
 	{
 		src: '/images/frontpage/ottawa-parliment.webp',
@@ -35,11 +35,11 @@ export const heroImages = [
 	},
 	{
 		src: '/images/frontpage/patras-sunset.webp',
-		caption: 'Sunset, Patras, Greece',
+		caption: 'Pier, Patras, Greece',
 	},
 	{
 		src: '/images/frontpage/prague-storm.webp',
-		caption: 'Storm, Prague, Czech Republic',
+		caption: 'Waldstein Palace, Prague, Czechia',
 	},
 	{
 		src: '/images/frontpage/st-pancras.webp',
@@ -47,7 +47,7 @@ export const heroImages = [
 	},
 	{
 		src: '/images/frontpage/tucholski-forest.webp',
-		caption: 'Tucholski Forest, Poland',
+		caption: 'Pinewoods, Tucholski Forest, Poland',
 	},
 	{
 		src: '/images/frontpage/westerpark.webp',
