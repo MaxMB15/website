@@ -93,4 +93,22 @@ body {
     z-index: 100;
     @apply bg-white rounded shadow-lg outline-none ring-2 ring-gray-800;
   }
+
+  /* About Me: text wraps around image on desktop (float inside same block as text) */
+  .about-me-flow {
+    display: block;
+  }
+  @media (min-width: 768px) {
+    .about-me-float {
+      float: left;
+      width: 20rem;
+      margin-right: 2rem;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+    /* Keep text inline so its line boxes wrap around the float */
+    .about-me-text {
+      overflow: visible;
+    }
+  }
 }

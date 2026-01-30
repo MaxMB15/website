@@ -50,7 +50,7 @@ const Experience = () => {
                     <p className="text-sm text-gray-500 mb-2">
                       {exp.period}
                     </p>
-                    <p>{exp.description}</p>
+                    <p className="whitespace-pre-line">{exp.description}</p>
                   </CardContent>
                 </Card>
                 {index < displayedExperiences.length - 1 && (

@@ -2,11 +2,11 @@ export const researchItems = [
 	{
 		title: 'Exploratory Programming Environments',
 		description:
-			'Exploratory programming has many advantages that are not utilized in current programming norms. I want to investigate how we can incorporate exploratory programming in the current interface of IDEs or perhaps create a new programming environment with this as a backbone.',
+			'Exploratory programming has many advantages that are not utilized in current programming norms. I want to investigate how we can incorporate exploratory programming in the current interface of IDEs or perhaps create a new programming environment with this as a backbone. I explore how we can use graph-based programming environments to support exploratory programming.',
 	},
 	{
 		title: 'Programming Languages for Distributed Systems',
-		description: '',
+		description: 'Independent systems that have to maintain communication and coordination with each other are a growing area of interest. There are many different real world applications of this, such as autonomous vehicles, distributed databases, and more. I\'m interested in how languages and execution models can support distributed and concurrent systems, from declarative logic and reactive rules to parallel execution.',
 	},
 ];
 
@@ -63,7 +63,7 @@ export const interestItems = [
 	{
 		title: 'Performance Optimization',
 		description:
-			'Trying to get systems and applications to perform as performant and efficient as possible. Ask yourself, "how much throughput can we get?"',
+			'Trying to get systems and applications to perform as performant and efficient as possible. Ask yourself, "how much throughput can we really get?" The answer to this question is often not obvious, and it is a fun challenge to find out.',
 	},
 	{
 		title: 'Full-stack Development',
@@ -73,11 +73,11 @@ export const interestItems = [
 	{
 		title: 'Autonomous systems',
 		description:
-			'Learning is a fundamental skill that allowed humanity to thrive and adapt. Allowing a system (potentially using AI/ML) to learn and adapt through unknown scenarios I believe will be a huge field in software.',
+			'Learning is a fundamental skill that allowed humanity to thrive and adapt. Allowing a system (potentially using AI agents) to learn and adapt through unknown scenarios I believe is a huge field in software engineering and only going to grow with the advents of AI. ',
 	},
 	{
 		title: 'Embedded Systems, Robotics, and Intelligent systems',
 		description:
-			'A UI on a screen is nice, but going into the real-world and making your code come to life is a real enjoyable experience. Exploring how to create everyday devices that interact with you instead of the otherway around is a lot of fun to make.',
+			'A UI on a screen is nice, but going into the real-world and making your code come to life is a real enjoyable experience. Exploring how to create everyday devices that interact with you instead of the otherway around is a lot of fun to make. From low level embedded systems to high level intelligent software systems, there is a lot to explore.',
 	},
 ];
