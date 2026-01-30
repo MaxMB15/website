@@ -19,6 +19,13 @@ export const projects = [
 		href: 'https://github.com/orgs/DevOps-Cloud-Team5/repositories',
 	},
 	{
+		title: 'Tablut AI Agent',
+		description:
+			'My entry for class competition for the best AI agent for the board game Tablut.',
+		image: '/images/projects/tablut.webp',
+		href: 'https://github.com/MaxMB15/Tablut',
+	},
+	{
 		title: 'Mood.AI',
 		description:
 			'A journal app using sentimental analysis to predict moods.',
