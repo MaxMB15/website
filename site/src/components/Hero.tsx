@@ -9,46 +9,7 @@ import {
 } from 'framer-motion';
 import Image from 'next/image';
 import FadeInText from './FadeInText';
-
-const images = [
-	{
-		src: '/images/frontpage/beaver-lake.jpg',
-		caption: 'Beaver Lake, Montréal, QC, Canada',
-	},
-	{ src: '/images/frontpage/cuba-alley.jpg', caption: 'Alley, Havana, Cuba' },
-	{
-		src: '/images/frontpage/cuba-city-view.jpg',
-		caption: 'City View, Havana, Cuba',
-	},
-	{
-		src: '/images/frontpage/lake-union.jpg',
-		caption: 'Lake Union, Seattle, WA, USA',
-	},
-	{
-		src: '/images/frontpage/mcgill-snow-mct.jpg',
-		caption: 'McGill Snow, Montréal, QC, Canada',
-	},
-];
-
-const subheaders = [
-	'Software Engineer',
-	'Developer',
-	'Researcher',
-	'Coder',
-	'Programmer',
-	'Tech Enthusiast',
-	'Full-stack Developer',
-	'Web Developer',
-	'Backend Developer',
-	'Frontend Developer',
-	'Software Developer',
-	'Computer Scientist',
-	'Software Designer',
-	'Software Consultant',
-	'Software Specialist',
-	'DevOps Engineer',
-	'UI/UX Designer',
-];
+import { heroImages, heroSubheaders } from '@/lib/hero';
 
 const Hero = () => {
 	const [currentImage, setCurrentImage] = useState(0);
@@ -62,11 +23,11 @@ const Hero = () => {
 
 	useEffect(() => {
 		const imageInterval = setInterval(() => {
-			setCurrentImage((prev) => (prev + 1) % images.length);
+			setCurrentImage((prev) => (prev + 1) % heroImages.length);
 		}, 5000);
 
 		const subheaderInterval = setInterval(() => {
-			setCurrentSubheader((prev) => (prev + 1) % subheaders.length);
+			setCurrentSubheader((prev) => (prev + 1) % heroSubheaders.length);
 		}, 3000);
 
 		return () => {
@@ -101,8 +62,8 @@ const Hero = () => {
 						}}
 					>
 						<Image
-							src={images[currentImage].src}
-							alt={images[currentImage].caption}
+							src={heroImages[currentImage].src}
+							alt={heroImages[currentImage].caption}
 							fill
 							className="object-cover"
 							priority
@@ -112,7 +73,7 @@ const Hero = () => {
 				</AnimatePresence>
 			</div>
 			{/* Preload all images */}
-			{images.map((image, index) => (
+			{heroImages.map((image, index) => (
 				<div key={index} className="hidden">
 					<Image
 						src={image.src}
@@ -123,12 +84,15 @@ const Hero = () => {
 				</div>
 			))}
 			<motion.div
-				className="absolute inset-0 bg-white"
+				className="absolute inset-0 bg-gradient-to-b from-transparent to-white"
 				style={{ opacity }}
 			/>
 			<div className="absolute inset-0 flex flex-col items-center justify-center">
-				<div className="relative p-8 rounded-lg overflow-hidden">
-					<div className="absolute inset-0 bg-black opacity-50 blur-xl"></div>
+				<div className="relative p-8 overflow-visible">
+					<div
+						className="absolute inset-0 min-w-[200%] min-h-[200%] -left-1/2 -top-1/2 blur-2xl bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,rgba(0,0,0,0.65)_0%,rgba(0,0,0,0.35)_45%,transparent_75%)]"
+						aria-hidden
+					/>
 					<div className="relative z-10">
 						<FadeInText
 							text="Max Boksem"
@@ -143,7 +107,7 @@ const Hero = () => {
 								transition={{ duration: 0.5 }}
 							>
 								<FadeInText
-									text={subheaders[currentSubheader]}
+									text={heroSubheaders[currentSubheader]}
 									className="text-2xl text-white text-center"
 								/>
 							</motion.div>
@@ -154,13 +118,13 @@ const Hero = () => {
 			<AnimatePresence mode="wait">
 				<motion.div
 					key={currentImage}
-					className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm"
+					className="absolute bottom-4 right-4 bg-black/40 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -20 }}
 					transition={{ duration: 0.5 }}
 				>
-					{images[currentImage].caption}
+					{heroImages[currentImage].caption}
 				</motion.div>
 			</AnimatePresence>
 		</section>
