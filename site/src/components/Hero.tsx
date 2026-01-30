@@ -11,15 +11,23 @@ import Image from 'next/image';
 import FadeInText from './FadeInText';
 import { heroImages, heroSubheaders } from '@/lib/hero';
 
+/** Minimal blur placeholder for LCP hero image (no white flash). */
+const HERO_BLUR_DATA_URL =
+	'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBRIhMQYTQVFh/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAZEQACAwEAAAAAAAAAAAAAAAABAgADESH/2gAMAwEAAhEDEEA/ALnZ2drbW6QwQRxRIMKiKFUD4AqjSlK/9k=';
+
 const Hero = () => {
 	const [currentImage, setCurrentImage] = useState(0);
 	const [currentSubheader, setCurrentSubheader] = useState(0);
+	const [heroImageReady, setHeroImageReady] = useState(false);
 	const sectionRef = useRef(null);
 	const { scrollYProgress } = useScroll({
 		target: sectionRef,
 		offset: ['start start', 'end start'],
 	});
 	const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+	const textOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+	const textScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
+	const textY = useTransform(scrollYProgress, [0, 1], [0, -24]);
 
 	useEffect(() => {
 		const imageInterval = setInterval(() => {
@@ -42,23 +50,28 @@ const Hero = () => {
 			id="hero"
 			className="relative h-screen overflow-hidden"
 		>
+			{/* Placeholder until first hero image has loaded (avoids buffering flash). */}
+			{!heroImageReady && (
+				<div
+					className="absolute inset-0 z-20 bg-gradient-to-b from-gray-700 to-gray-900"
+					aria-hidden
+				/>
+			)}
 			<div className="absolute inset-0 -z-50">
 				<AnimatePresence initial={false}>
 					<motion.div
 						key={currentImage}
+						className="absolute inset-0"
 						initial={{ opacity: 0, scale: 1 }}
-						animate={{ opacity: 1, scale: 1.1 }}
+						animate={{
+							opacity: 1,
+							scale:
+								currentImage === 0 && !heroImageReady ? 1 : 1.1,
+						}}
 						exit={{ opacity: 0, scale: 1.1 }}
 						transition={{
 							opacity: { duration: 1 },
 							scale: { duration: 5, ease: 'linear' },
-						}}
-						style={{
-							position: 'fixed',
-							top: 0,
-							left: 0,
-							right: 0,
-							bottom: 0,
 						}}
 					>
 						<Image
@@ -66,29 +79,24 @@ const Hero = () => {
 							alt={heroImages[currentImage].caption}
 							fill
 							className="object-cover"
-							priority
+							priority={currentImage === 0}
 							sizes="100vw"
+							placeholder={currentImage === 0 ? 'blur' : 'empty'}
+							blurDataURL={currentImage === 0 ? HERO_BLUR_DATA_URL : undefined}
+							onLoad={currentImage === 0 ? () => setHeroImageReady(true) : undefined}
 						/>
 					</motion.div>
 				</AnimatePresence>
 			</div>
-			{/* Preload all images */}
-			{heroImages.map((image, index) => (
-				<div key={index} className="hidden">
-					<Image
-						src={image.src}
-						alt={image.caption}
-						fill
-						priority
-					/>
-				</div>
-			))}
 			<motion.div
 				className="absolute inset-0 bg-gradient-to-b from-transparent to-white"
 				style={{ opacity }}
 			/>
-			<div className="absolute inset-0 flex flex-col items-center justify-center">
-				<div className="relative p-8 overflow-visible">
+			<div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+				<motion.div
+					className="relative p-8 overflow-visible pointer-events-auto"
+					style={{ opacity: textOpacity, scale: textScale, y: textY }}
+				>
 					<div
 						className="absolute inset-0 min-w-[200%] min-h-[200%] -left-1/2 -top-1/2 blur-2xl bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,rgba(0,0,0,0.65)_0%,rgba(0,0,0,0.35)_45%,transparent_75%)]"
 						aria-hidden
@@ -113,20 +121,25 @@ const Hero = () => {
 							</motion.div>
 						</AnimatePresence>
 					</div>
-				</div>
-			</div>
-			<AnimatePresence mode="wait">
-				<motion.div
-					key={currentImage}
-					className="absolute bottom-4 right-4 bg-black/40 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm"
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, y: -20 }}
-					transition={{ duration: 0.5 }}
-				>
-					{heroImages[currentImage].caption}
 				</motion.div>
-			</AnimatePresence>
+			</div>
+			<motion.div
+				className="absolute bottom-4 right-4"
+				style={{ opacity: textOpacity, scale: textScale, y: textY }}
+			>
+				<AnimatePresence mode="wait">
+					<motion.div
+						key={currentImage}
+						className="bg-black/40 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm"
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						transition={{ duration: 0.5 }}
+					>
+						{heroImages[currentImage].caption}
+					</motion.div>
+				</AnimatePresence>
+			</motion.div>
 		</section>
 	);
 };

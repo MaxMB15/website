@@ -3,7 +3,7 @@ export const experiences = [
 		title: 'Research Engineer',
 		company: 'University of Amsterdam',
 		location: 'Amsterdam, NH, Netherlands',
-		period: '2025 - Present',
+		period: '2025 - 2025',
 		description:
 			'Conducted research on AI and machine learning applications in image processing.',
 		logo: '/images/logos/uva-logo.svg',

@@ -3,23 +3,34 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
 	const [isVisible, setIsVisible] = useState(false);
+	const pathname = usePathname();
+
+	const updateVisibility = () => {
+		const heroSection = document.getElementById('hero');
+		if (heroSection) {
+			const heroBottom =
+				heroSection.offsetTop + heroSection.offsetHeight;
+			setIsVisible(window.scrollY > heroBottom);
+		} else {
+			setIsVisible(true);
+		}
+	};
 
 	useEffect(() => {
-		const handleScroll = () => {
-			const heroSection = document.getElementById('hero');
-			if (heroSection) {
-				const heroBottom =
-					heroSection.offsetTop + heroSection.offsetHeight;
-				setIsVisible(window.scrollY > heroBottom);
-			}
-		};
-
+		updateVisibility();
+		const handleScroll = () => updateVisibility();
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
+
+	useEffect(() => {
+		const id = requestAnimationFrame(() => updateVisibility());
+		return () => cancelAnimationFrame(id);
+	}, [pathname]);
 
 	return (
 		<nav

@@ -16,7 +16,7 @@ const Research = () => {
 				<h2 className="text-4xl font-bold mb-12 text-center">
 					Research / Publications / Interests
 				</h2>
-				<Tabs defaultValue="research" className="max-w-4xl mx-auto">
+				<Tabs defaultValue="publications" className="max-w-4xl mx-auto">
 					<TabsList className="grid w-full grid-cols-3">
 						<TabsTrigger value="research">Research</TabsTrigger>
 						<TabsTrigger value="publications">
