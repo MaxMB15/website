@@ -71,3 +71,22 @@ body {
     @apply bg-background text-foreground;
 	}
 }
+
+@layer components {
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    clip: auto;
+    overflow: visible;
+    top: 1rem;
+    left: 1rem;
+    z-index: 100;
+    @apply bg-white rounded shadow-lg outline-none ring-2 ring-gray-800;
+  }
+}

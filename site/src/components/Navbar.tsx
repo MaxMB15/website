@@ -23,6 +23,7 @@ const Navbar = () => {
 
 	return (
 		<nav
+			aria-label="Main navigation"
 			className={`fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md transition-all duration-300 ${
 				isVisible ? 'translate-y-0' : '-translate-y-full'
 			}`}
@@ -30,21 +31,22 @@ const Navbar = () => {
 			<div className="container mx-auto px-4 py-4">
 				<div className="flex items-center">
 					<div className="w-16">
-                    <Link
-								href="/"
-								className="text-gray-800 hover:text-gray-600"
+						<Link
+							href="/"
+							className="text-gray-800 hover:text-gray-600"
+							aria-label="Home"
 						>
-						<Image
-							src="/images/logos/MB-Logo.svg"
-							width={48}
-							height={48}
-							className="h-12 w-12"
-							alt="Logo"
-							priority
-						/>
-                        </Link>
+							<Image
+								src="/images/logos/MB-Logo.svg"
+								width={48}
+								height={48}
+								className="h-12 w-12"
+								alt=""
+								priority
+							/>
+						</Link>
 					</div>
-					<ul className="flex justify-center space-x-6 flex-1">
+					<ul className="flex justify-center space-x-6 flex-1" role="list">
 						<li>
 							<Link
 								href="/#about"

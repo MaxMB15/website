@@ -1,36 +1,18 @@
+import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { projects } from '@/lib/projects';
 
-export const projects = [
-	{
-		title: 'Incremental Graph Code (IGC)',
+export const metadata: Metadata = {
+	title: 'Projects',
+	description:
+		'Portfolio projects by Max Boksem: software engineering, research, and side projects.',
+	openGraph: {
+		title: 'Projects | Max Boksem',
 		description:
-			'An exploratory programming environment that tries to balance typical IDEs and IPEs',
-		image: '',
+			'Portfolio projects by Max Boksem: software engineering, research, and side projects.',
 	},
-	{
-		title: 'CL0',
-		description: 'A distributed, event-based programming language.',
-		image: '',
-	},
-	{
-		title: 'Attendunce',
-		description: 'An attendance tracking app build with cloud infra.',
-		image: '',
-	},
-	{
-		title: 'Mood.AI',
-		description:
-			'A journal app using sentimental analysis to predict moods.',
-		image: '',
-	},
-	{
-		title: 'DrawMyThing',
-		description:
-			'A remake of the classic game to guess what others are drawing.',
-		image: '',
-	},
-];
+};
 
 const ProjectsPage = () => {
 	return (
@@ -49,7 +31,7 @@ const ProjectsPage = () => {
 							{project.description}
 						</p>
 						<Button asChild>
-							<Link href="#">View Project</Link>
+							<Link href={project.href}>View Project</Link>
 						</Button>
 					</div>
 				))}

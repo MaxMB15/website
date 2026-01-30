@@ -4,9 +4,9 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import Image from 'next/image'
 import Autoplay from 'embla-carousel-autoplay'
-import { projects } from '@/app/projects/page'
-
+import { projects } from '@/lib/projects'
 
 const Projects = () => {
   return (
@@ -30,7 +30,15 @@ const Projects = () => {
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                 <Card>
                   <CardContent className="p-0">
-                    <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+                    <div className="relative w-full h-48">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    </div>
                     <div className="p-4">
                       <h3 className="font-semibold text-center">{project.title}</h3>
                     </div>

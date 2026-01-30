@@ -102,10 +102,11 @@ const Hero = () => {
 					>
 						<Image
 							src={images[currentImage].src}
-							alt={`Background ${currentImage + 1}`}
-							layout="fill"
-							objectFit="cover"
+							alt={images[currentImage].caption}
+							fill
+							className="object-cover"
 							priority
+							sizes="100vw"
 						/>
 					</motion.div>
 				</AnimatePresence>
@@ -115,8 +116,8 @@ const Hero = () => {
 				<div key={index} className="hidden">
 					<Image
 						src={image.src}
-						alt={`Preload ${index + 1}`}
-						layout="fill"
+						alt={image.caption}
+						fill
 						priority
 					/>
 				</div>
