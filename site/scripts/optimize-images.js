@@ -13,8 +13,7 @@ const PUBLIC_IMAGES = path.join(__dirname, '..', 'public', 'images');
 const CONFIG = {
 	frontpage: { maxWidth: 1920, quality: 82 },
 	me: { maxWidth: 1200, quality: 85 },
-	portrait: { maxWidth: 1200, quality: 85 },
-	landscape: { maxWidth: 1200, quality: 85 },
+	projects: { maxWidth: 1200, quality: 85 },
 };
 
 const JPG_EXT = /\.(jpg|jpeg|JPG|JPEG)$/;

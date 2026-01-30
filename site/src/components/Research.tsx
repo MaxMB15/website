@@ -8,6 +8,25 @@ import {
 	publicationItems,
 	interestItems,
 } from '@/lib/research';
+import type { PublicationType } from '@/lib/research';
+
+const publicationTypeConfig: Record<
+	PublicationType,
+	{ label: string; className: string }
+> = {
+	thesis: {
+		label: 'Thesis',
+		className: 'bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300',
+	},
+	workshop: {
+		label: 'Workshop',
+		className: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
+	},
+	paper: {
+		label: 'Paper',
+		className: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
+	},
+};
 
 const Research = () => {
 	return (
@@ -50,16 +69,50 @@ const Research = () => {
 							transition={{ duration: 0.5 }}
 							className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8"
 						>
-							{publicationItems.map((item, index) => (
-								<Card key={index}>
-									<CardHeader>
-										<CardTitle>{item.title}</CardTitle>
-									</CardHeader>
-									<CardContent>
-										<p>{item.description}</p>
-									</CardContent>
-								</Card>
-							))}
+							{publicationItems.map((item, index) => {
+								const typeConfig = publicationTypeConfig[item.type];
+								return (
+									<Card key={index}>
+										<CardHeader className="space-y-2">
+											<span
+												className={`inline-flex w-fit rounded-full px-2.5 py-0.5 text-xs font-medium ${typeConfig.className}`}
+											>
+												{typeConfig.label}
+											</span>
+											<CardTitle>{item.title}</CardTitle>
+										</CardHeader>
+										<CardContent className="space-y-4">
+											<p className="whitespace-pre-line text-muted-foreground">
+												{item.description}
+											</p>
+											{(item.doi || item.downloadUrl) && (
+												<div className="flex flex-wrap gap-2">
+													{item.doi && (
+														<a
+															href={`https://doi.org/${item.doi}`}
+															target="_blank"
+															rel="noopener noreferrer"
+															className="inline-flex items-center rounded-full border border-input bg-background px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+														>
+															View DOI
+														</a>
+													)}
+													{item.downloadUrl && (
+														<a
+															href={item.downloadUrl}
+															target="_blank"
+															rel="noopener noreferrer"
+															className="inline-flex items-center rounded-full border border-input bg-background px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+														>
+															Download PDF
+														</a>
+													)}
+												</div>
+											)}
+										</CardContent>
+									</Card>
+								);
+							})}
 						</motion.div>
 					</TabsContent>
 					<TabsContent value="interests">

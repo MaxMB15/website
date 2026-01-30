@@ -10,21 +10,42 @@ export const researchItems = [
 	},
 ];
 
-export const publicationItems = [
+export type PublicationType = 'workshop' | 'thesis' | 'paper';
+
+export interface PublicationItem {
+	type: PublicationType;
+	title: string;
+	description: string;
+	doi?: string;
+	downloadUrl?: string;
+}
+
+export const publicationItems: PublicationItem[] = [
 	{
-		title: '(Paper) Bridging Incremental Programming and Complex Software Development in Modern Programming Environments',
+		type: 'paper',
+		title:
+			'Bridging Incremental Programming and Complex Software Development in Modern Programming Environments',
 		description:
-			'Presented at Paint part of <> in 2024, Pasadena, California, USA\nPublished to ACM.',
+			'Presented at PAINT part of SPLASH in 2024, Pasadena, California, USA\nPublished to ACM.',
+		doi: '10.1145/3689488.3689991',
+		downloadUrl: 'https://dl.acm.org/doi/pdf/10.1145/3689488.3689991',
 	},
 	{
-		title: '(Thesis) Bridging Incremental Programming and Complex Software Development in Modern Programming Environments',
+		type: 'thesis',
+		title:
+			'Bridging Incremental Programming and Complex Software Development in Modern Programming Environments',
 		description:
 			'Thesis Defense as part of UvA Masters in Software Engineering.\nPublished to UvA digital library.',
+		downloadUrl: 'https://scripties.uba.uva.nl/search?id=record_55728',
 	},
 	{
-		title: '(Paper) Exploration and Complexity Management in Graph-based Programming Environments',
+		type: 'paper',
+		title:
+			'Exploration and Complexity Management in Graph-based Programming Environments',
 		description:
-			'Presented at the Programming Experience part of <Programming> in 2025, Prague, Czechia.\nPreprint.',
+			'Presented at the Programming Experience part of <Programming> in 2025, Prague, Czechia.\nPublished to OASIcs by Dagstuhl Publishing.',
+		doi: '10.4230/OASIcs.Programming.2025.6',
+		downloadUrl: 'https://drops.dagstuhl.de/storage/01oasics/oasics-vol134-programming2025/OASIcs.Programming.2025.6/OASIcs.Programming.2025.6.pdf',
 	},
 ];
 
