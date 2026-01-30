@@ -19,11 +19,11 @@ const AboutMe = () => {
 						className="relative aspect-square w-full max-w-md mx-auto rounded-2xl overflow-hidden"
 					>
 						<Image
-							src="/images/me/IMG_8779.JPG"
+							src="/images/me/me.webp"
 							alt="Max Boksem"
 							fill
 							className="object-cover"
-							priority
+							sizes="(max-width: 768px) 100vw, 50vw"
 						/>
 					</motion.div>
 					<motion.div

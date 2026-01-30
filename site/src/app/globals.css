@@ -8,6 +8,9 @@ body {
 
 @layer base {
   :root {
+		--accent: 214 90% 62%;
+		--page-bg: #f0f6ff;
+		--footer-bg: #1e3a5f;
 		--background: 0 0% 100%;
 		--foreground: 0 0% 3.9%;
 		--card: 0 0% 100%;
@@ -68,7 +71,8 @@ body {
     @apply border-border;
 	}
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--page-bg);
+    @apply text-foreground;
 	}
 }
 

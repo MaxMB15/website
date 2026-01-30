@@ -3,6 +3,7 @@ import { Geist, Azeret_Mono as Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import { getPersonStructuredData } from '@/lib/structured-data';
+import { heroImages } from '@/lib/hero';
 
 const geistSans = Geist({
 	subsets: ['latin'],
@@ -81,6 +82,11 @@ export default function RootLayout({
 	return (
 		<html lang="en" className="scroll-smooth top-1">
 			<head>
+				<link
+					rel="preload"
+					as="image"
+					href={heroImages[0].src}
+				/>
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
