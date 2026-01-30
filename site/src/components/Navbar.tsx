@@ -76,6 +76,14 @@ const Navbar = () => {
 						</li>
 						<li>
 							<Link
+								href="/#skills"
+								className="text-gray-800 hover:text-gray-600"
+							>
+								Skills
+							</Link>
+						</li>
+						<li>
+							<Link
 								href="/#research"
 								className="text-gray-800 hover:text-gray-600"
 							>

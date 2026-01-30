@@ -3,6 +3,7 @@ import AboutMe from '@/components/AboutMe'
 import Experience from '@/components/Experience'
 import Research from '@/components/Research'
 import Projects from '@/components/Projects'
+import Skills from '@/components/Skills'
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <AboutMe />
       <Experience />
+      <Skills />
       <Research />
       <Projects />
       <Footer />
