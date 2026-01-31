@@ -4,6 +4,12 @@ import Script from 'next/script';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Linkedin, Github, Download, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+} from '@/components/ui/dialog';
 import { verifyResume, verifyContact } from '@/lib/api';
 
 declare global {
@@ -40,6 +46,7 @@ export default function FooterActions() {
 	const contactWidgetId = useRef<string | null>(null);
 
 	const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+	const open = activeAction !== null;
 
 	useEffect(() => {
 		if (!scriptReady || !siteKey || !window.turnstile || !activeAction) return;
@@ -62,8 +69,10 @@ export default function FooterActions() {
 						if (resumeWidgetId.current != null)
 							window.turnstile?.reset(resumeWidgetId.current);
 						setActiveAction(null);
-					} catch {
-						setResumeError('Download failed. Please try again.');
+					} catch (err) {
+						setResumeError(
+							err instanceof Error ? err.message : 'Download failed. Please try again.'
+						);
 					} finally {
 						setResumeLoading(false);
 					}
@@ -82,7 +91,6 @@ export default function FooterActions() {
 						setContactEmail(data.email ?? '');
 						if (contactWidgetId.current != null)
 							window.turnstile?.reset(contactWidgetId.current);
-						// Keep panel open so user sees email and Copy button
 					} catch {
 						setContactError('Something went wrong. Please try again.');
 					} finally {
@@ -97,6 +105,10 @@ export default function FooterActions() {
 		if (!contactEmail) return;
 		navigator.clipboard.writeText(contactEmail);
 	}, [contactEmail]);
+
+	const handleOpenChange = useCallback((open: boolean) => {
+		if (!open) setActiveAction(null);
+	}, []);
 
 	const linkClass =
 		'inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors';
@@ -188,55 +200,65 @@ export default function FooterActions() {
 				</button>
 			</nav>
 
-			{activeAction === 'resume' && (
-				<div className="flex flex-col items-center gap-2 pt-4">
-					<div id="turnstile-resume" className="turnstile-container" />
-					{resumeLoading && (
-						<span className="text-xs text-white/60">Preparing download…</span>
-					)}
-					{resumeError && (
-						<p className="text-xs text-amber-300/90" role="alert">
-							{resumeError}
-						</p>
-					)}
-				</div>
-			)}
-			{activeAction === 'email' && (
-				<div className="flex flex-col items-center gap-2 pt-4">
-					<div id="turnstile-contact" className="turnstile-container" />
-					{contactLoading && (
-						<span className="text-xs text-white/60">Verifying…</span>
-					)}
-					{contactError && (
-						<p className="text-xs text-amber-300/90" role="alert">
-							{contactError}
-						</p>
-					)}
-					{contactEmail !== null && contactEmail !== '' && (
-						<div className="flex flex-wrap items-center justify-center gap-2">
-							<code className="rounded bg-white/10 px-2 py-1 text-sm text-white/90">
-								{contactEmail}
-							</code>
-							<Button
-								variant="ghost"
-								size="sm"
-								className="text-white/80 hover:text-white"
-								onClick={copyContact}
-							>
-								Copy
-							</Button>
-							<Button
-								variant="ghost"
-								size="sm"
-								className="text-white/80 hover:text-white"
-								onClick={() => setActiveAction(null)}
-							>
-								Close
-							</Button>
-						</div>
-					)}
-				</div>
-			)}
+			<Dialog open={open} onOpenChange={handleOpenChange}>
+				<DialogContent className="sm:max-w-md">
+					<DialogHeader>
+						<DialogTitle>
+							{activeAction === 'resume'
+								? 'Download resume'
+								: activeAction === 'email'
+									? 'Get contact info'
+									: ''}
+						</DialogTitle>
+					</DialogHeader>
+					<div className="flex flex-col items-center gap-4 py-2">
+						{activeAction === 'resume' && (
+							<>
+								<div id="turnstile-resume" className="turnstile-container" />
+								{resumeLoading && (
+									<span className="text-sm text-muted-foreground">
+										Preparing download…
+									</span>
+								)}
+								{resumeError && (
+									<p className="text-sm text-destructive" role="alert">
+										{resumeError}
+									</p>
+								)}
+							</>
+						)}
+						{activeAction === 'email' && (
+							<>
+								<div id="turnstile-contact" className="turnstile-container" />
+								{contactLoading && (
+									<span className="text-sm text-muted-foreground">
+										Verifying…
+									</span>
+								)}
+								{contactError && (
+									<p className="text-sm text-destructive" role="alert">
+										{contactError}
+									</p>
+								)}
+								{contactEmail !== null && contactEmail !== '' && (
+									<div className="flex flex-wrap items-center justify-center gap-2 w-full">
+										<code className="rounded bg-muted px-2 py-1 text-sm flex-1 min-w-0 truncate">
+											{contactEmail}
+										</code>
+										<Button
+											variant="secondary"
+											size="sm"
+											onClick={copyContact}
+										>
+											Copy
+										</Button>
+									</div>
+								)}
+							</>
+						)}
+					</div>
+				</DialogContent>
+			</Dialog>
 		</>
 	);
 }
