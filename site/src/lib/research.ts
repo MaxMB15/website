@@ -53,7 +53,7 @@ export const interestItems = [
 	{
 		title: 'Programming Environments/Languages',
 		description:
-			'Exploring how different programming environments, DSLs, and compilers can effect user behavior and productivity.',
+			'Exploring how different programming environments, DSLs, and compilers can effect user behavior and productivity. Many programming environments are already being created to support AI, but what about supporting other aspects of programming like incremental or exploratory programming?',
 	},
 	{
 		title: 'System / Software Architecture',

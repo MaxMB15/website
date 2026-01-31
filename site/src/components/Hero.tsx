@@ -57,11 +57,11 @@ const Hero = () => {
 					aria-hidden
 				/>
 			)}
-			<div className="absolute inset-0 -z-50">
+			<div className="absolute inset-0 z-0">
 				<AnimatePresence initial={false}>
 					<motion.div
 						key={currentImage}
-						className="absolute inset-0"
+						className="absolute inset-0 z-0"
 						initial={{ opacity: 0, scale: 1 }}
 						animate={{
 							opacity: 1,
@@ -89,10 +89,10 @@ const Hero = () => {
 				</AnimatePresence>
 			</div>
 			<motion.div
-				className="absolute inset-0 bg-gradient-to-b from-transparent to-white"
+				className="absolute inset-0 z-[1] bg-gradient-to-b from-transparent to-white pointer-events-none"
 				style={{ opacity }}
 			/>
-			<div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+			<div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
 				<motion.div
 					className="relative p-8 overflow-visible pointer-events-auto"
 					style={{ opacity: textOpacity, scale: textScale, y: textY }}
@@ -124,7 +124,7 @@ const Hero = () => {
 				</motion.div>
 			</div>
 			<motion.div
-				className="absolute bottom-4 right-4"
+				className="absolute bottom-4 right-4 z-10"
 				style={{ opacity: textOpacity, scale: textScale, y: textY }}
 			>
 				<AnimatePresence mode="wait">

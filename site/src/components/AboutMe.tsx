@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
-const INTRO = `Hello! I'm Max Boksem, a software engineer and researcher. I grew up around the tech scene in Seattle, Washington, USA. Since I was a kid I've been captivated by how technology works under the hood.
+const INTRO = `Hello! I'm Max Boksem, a software engineer and researcher. I grew up around the tech scene in Seattle, Washington, USA in a Dutch family. Since I was a kid I've been captivated by how technology works under the hood.
 
 That led me to take every tech class my high school offered, plus summer programming courses at nearby universities.`;
 
