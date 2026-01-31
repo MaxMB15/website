@@ -19,6 +19,8 @@ const Hero = () => {
 	const [currentImage, setCurrentImage] = useState(0);
 	const [currentSubheader, setCurrentSubheader] = useState(0);
 	const [heroImageReady, setHeroImageReady] = useState(false);
+	const [nextImageLoaded, setNextImageLoaded] = useState(false);
+	const nextImageLoadedRef = useRef(false);
 	const sectionRef = useRef(null);
 	const { scrollYProgress } = useScroll({
 		target: sectionRef,
@@ -29,19 +31,23 @@ const Hero = () => {
 	const textScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
 	const textY = useTransform(scrollYProgress, [0, 1], [0, -24]);
 
+	nextImageLoadedRef.current = nextImageLoaded;
+
+	// Only advance when the next image has loaded (keeps mobile from showing blank/buffering)
 	useEffect(() => {
 		const imageInterval = setInterval(() => {
+			if (!nextImageLoadedRef.current) return;
+			setNextImageLoaded(false);
 			setCurrentImage((prev) => (prev + 1) % heroImages.length);
 		}, 5000);
+		return () => clearInterval(imageInterval);
+	}, []);
 
+	useEffect(() => {
 		const subheaderInterval = setInterval(() => {
 			setCurrentSubheader((prev) => (prev + 1) % heroSubheaders.length);
 		}, 3000);
-
-		return () => {
-			clearInterval(imageInterval);
-			clearInterval(subheaderInterval);
-		};
+		return () => clearInterval(subheaderInterval);
 	}, []);
 
 	return (
@@ -69,6 +75,9 @@ const Hero = () => {
 						fill
 						className="object-cover"
 						sizes="100vw"
+						onLoad={() => {
+							setNextImageLoaded(true);
+						}}
 					/>
 				</div>
 				<AnimatePresence initial={false}>
