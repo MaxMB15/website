@@ -30,14 +30,22 @@ const ProjectsPage = () => {
 						<p className="text-gray-600 mb-4">
 							{project.description}
 						</p>
-						<Button asChild>
+						<Button
+							asChild
+							variant="outline"
+							className="border-[rgb(58,123,244)] text-[rgb(58,123,244)] hover:bg-[rgb(58,123,244)] hover:text-white"
+						>
 							<Link href={project.href}>View Project</Link>
 						</Button>
 					</div>
 				))}
 			</div>
 			<div className="mt-12 text-center">
-				<Button asChild>
+				<Button
+					asChild
+					variant="outline"
+					className="border-[rgb(58,123,244)] text-[rgb(58,123,244)] hover:bg-[rgb(58,123,244)] hover:text-white"
+				>
 					<Link href="/">Back to Home</Link>
 				</Button>
 			</div>

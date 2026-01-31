@@ -70,7 +70,6 @@ body {
   * {
     @apply border-border;
 	}
-  /* Option 2: disable overscroll bounce so no white leak at top/bottom */
   html {
     overscroll-behavior: none;
     background-color: var(--page-bg);

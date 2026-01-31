@@ -51,7 +51,11 @@ const Projects = () => {
           <CarouselNext />
         </Carousel>
         <div className="mt-12 text-center">
-          <Button asChild>
+          <Button
+            asChild
+            variant="outline"
+            className="border-[rgb(58,123,244)] text-[rgb(58,123,244)] hover:bg-[rgb(58,123,244)] hover:text-white"
+          >
             <Link href="/projects">More Projects</Link>
           </Button>
         </div>
