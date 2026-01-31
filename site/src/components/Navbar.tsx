@@ -39,29 +39,29 @@ const Navbar = () => {
 				isVisible ? 'translate-y-0' : '-translate-y-full'
 			}`}
 		>
-			<div className="container mx-auto px-4 py-4">
-				<div className="flex items-center">
-					<div className="w-16">
+			<div className="container mx-auto px-4 py-4 max-w-full">
+				<div className="flex items-center min-w-0">
+					<div className="w-12 min-w-12 flex-shrink-0">
 						<Link
 							href="/"
-							className="text-gray-800 hover:text-gray-600"
+							className="text-gray-800 hover:text-gray-600 block"
 							aria-label="Home"
 						>
 							<Image
 								src="/images/logos/MB-Logo.svg"
 								width={48}
 								height={48}
-								className="h-12 w-12"
+								className="h-12 w-12 min-h-[48px] min-w-[48px]"
 								alt=""
 								priority
 							/>
 						</Link>
 					</div>
-					<ul className="flex justify-center space-x-6 flex-1" role="list">
+					<ul className="flex justify-center items-center gap-2 sm:gap-3 md:gap-6 flex-1 min-w-0 flex-wrap" role="list">
 						<li>
 							<Link
 								href="/#about"
-								className="text-gray-800 hover:text-gray-600"
+								className="text-gray-800 hover:text-gray-600 text-xs sm:text-sm md:text-base whitespace-nowrap"
 							>
 								About
 							</Link>
@@ -69,7 +69,7 @@ const Navbar = () => {
 						<li>
 							<Link
 								href="/#experience"
-								className="text-gray-800 hover:text-gray-600"
+								className="text-gray-800 hover:text-gray-600 text-xs sm:text-sm md:text-base whitespace-nowrap"
 							>
 								Experience
 							</Link>
@@ -77,7 +77,7 @@ const Navbar = () => {
 						<li>
 							<Link
 								href="/#skills"
-								className="text-gray-800 hover:text-gray-600"
+								className="text-gray-800 hover:text-gray-600 text-xs sm:text-sm md:text-base whitespace-nowrap"
 							>
 								Skills
 							</Link>
@@ -85,7 +85,7 @@ const Navbar = () => {
 						<li>
 							<Link
 								href="/#research"
-								className="text-gray-800 hover:text-gray-600"
+								className="text-gray-800 hover:text-gray-600 text-xs sm:text-sm md:text-base whitespace-nowrap"
 							>
 								Research
 							</Link>
@@ -93,7 +93,7 @@ const Navbar = () => {
 						<li>
 							<Link
 								href="/#projects"
-								className="text-gray-800 hover:text-gray-600"
+								className="text-gray-800 hover:text-gray-600 text-xs sm:text-sm md:text-base whitespace-nowrap"
 							>
 								Projects
 							</Link>
