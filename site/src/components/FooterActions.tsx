@@ -93,12 +93,11 @@ export default function FooterActions() {
 					theme: 'auto',
 					callback: async (token: string) => {
 						setContactLoading(true);
-						try {
-							const data = await verifyContact(token);
-							setContactEmail(data.email ?? '');
-							if (contactWidgetId.current != null)
-								window.turnstile?.reset(contactWidgetId.current);
-						} catch {
+					try {
+						const data = await verifyContact(token);
+						setContactEmail(data.email ?? '');
+						// Do not reset Turnstile on success — leave it completed and show email
+					} catch {
 							setContactError('Something went wrong. Please try again.');
 						} finally {
 							setContactLoading(false);

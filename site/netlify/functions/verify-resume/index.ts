@@ -55,9 +55,21 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
 		};
 	}
 
-	const resumePath = path.join(__dirname, 'resume.pdf');
-	if (!fs.existsSync(resumePath)) {
-		console.error('resume.pdf not found at', resumePath);
+	const possiblePaths = [
+		path.join(__dirname, 'resume.pdf'),
+		path.join(__dirname, '..', 'resume.pdf'),
+		path.join(process.cwd(), 'resume.pdf'),
+		path.join(process.cwd(), 'verify-resume', 'resume.pdf'),
+	];
+	let resumePath: string | null = null;
+	for (const p of possiblePaths) {
+		if (fs.existsSync(p)) {
+			resumePath = p;
+			break;
+		}
+	}
+	if (!resumePath) {
+		console.error('resume.pdf not found. Tried:', possiblePaths);
 		return { statusCode: 500, body: JSON.stringify({ error: 'Resume unavailable' }) };
 	}
 
