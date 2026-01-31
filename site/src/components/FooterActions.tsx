@@ -2,7 +2,7 @@
 
 import Script from 'next/script';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Linkedin, Github, Download, Mail } from 'lucide-react';
+import { Linkedin, Github, Download, Mail, Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
 	Dialog,
@@ -10,6 +10,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from '@/components/ui/dialog';
+import { toast } from 'sonner';
 import { verifyResume, verifyContact } from '@/lib/api';
 
 declare global {
@@ -112,6 +113,7 @@ export default function FooterActions() {
 	const copyContact = useCallback(() => {
 		if (!contactEmail) return;
 		navigator.clipboard.writeText(contactEmail);
+		toast.success('Email copied to clipboard');
 	}, [contactEmail]);
 
 	const handleOpenChange = useCallback((open: boolean) => {
@@ -249,16 +251,18 @@ export default function FooterActions() {
 									</p>
 								)}
 								{contactEmail !== null && contactEmail !== '' && (
-									<div className="flex flex-wrap items-center justify-center gap-2 w-full">
-										<code className="rounded bg-muted px-2 py-1 text-sm flex-1 min-w-0 truncate">
+									<div className="flex flex-wrap items-center justify-center gap-3 w-full">
+										<code className="rounded bg-muted px-3 py-2 text-sm flex-1 min-w-0 truncate border border-border">
 											{contactEmail}
 										</code>
 										<Button
-											variant="secondary"
-											size="sm"
+											variant="default"
+											size="default"
 											onClick={copyContact}
+											className="shadow-sm hover:shadow-md active:scale-[0.98] transition-all cursor-pointer"
 										>
-											Copy
+											<Copy className="h-4 w-4" aria-hidden />
+											Copy email
 										</Button>
 									</div>
 								)}

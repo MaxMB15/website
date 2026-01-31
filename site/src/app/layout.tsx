@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import { Geist, Azeret_Mono as Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
+import { Providers } from '@/components/Providers';
+import { Toaster } from '@/components/ui/sonner';
 import { getPersonStructuredData } from '@/lib/structured-data';
 import { heroImages } from '@/lib/hero';
 
@@ -106,11 +108,14 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
 			>
-				<a href="#main-content" className="skip-link">
-					Skip to content
-				</a>
-				<Navbar />
-				{children}
+				<Providers>
+					<a href="#main-content" className="skip-link">
+						Skip to content
+					</a>
+					<Navbar />
+					{children}
+					<Toaster />
+				</Providers>
 				{process.env.NEXT_PUBLIC_CF_BEACON_TOKEN && (
 					<script
 						defer
