@@ -58,10 +58,23 @@ const Hero = () => {
 				/>
 			)}
 			<div className="absolute inset-0 z-0">
+				{/* Preload next image so it's ready when the carousel advances */}
+				<div
+					className="absolute inset-0 z-0 opacity-0 pointer-events-none"
+					aria-hidden
+				>
+					<Image
+						src={heroImages[(currentImage + 1) % heroImages.length].src}
+						alt=""
+						fill
+						className="object-cover"
+						sizes="100vw"
+					/>
+				</div>
 				<AnimatePresence initial={false}>
 					<motion.div
 						key={currentImage}
-						className="absolute inset-0 z-0"
+						className="absolute inset-0 z-[1]"
 						initial={{ opacity: 0, scale: 1 }}
 						animate={{
 							opacity: 1,

@@ -35,6 +35,7 @@ export default function FooterActions() {
 	const [contactLoading, setContactLoading] = useState(false);
 	const [contactEmail, setContactEmail] = useState<string | null>(null);
 	const [contactError, setContactError] = useState<string | null>(null);
+	const [resumeError, setResumeError] = useState<string | null>(null);
 	const resumeWidgetId = useRef<string | null>(null);
 	const contactWidgetId = useRef<string | null>(null);
 
@@ -49,6 +50,7 @@ export default function FooterActions() {
 				theme: 'auto',
 				callback: async (token: string) => {
 					setResumeLoading(true);
+					setResumeError(null);
 					try {
 						const blob = await verifyResume(token);
 						const url = URL.createObjectURL(blob);
@@ -61,7 +63,7 @@ export default function FooterActions() {
 							window.turnstile?.reset(resumeWidgetId.current);
 						setActiveAction(null);
 					} catch {
-						// Silent fail
+						setResumeError('Download failed. Please try again.');
 					} finally {
 						setResumeLoading(false);
 					}
@@ -80,7 +82,7 @@ export default function FooterActions() {
 						setContactEmail(data.email ?? '');
 						if (contactWidgetId.current != null)
 							window.turnstile?.reset(contactWidgetId.current);
-						setActiveAction(null);
+						// Keep panel open so user sees email and Copy button
 					} catch {
 						setContactError('Something went wrong. Please try again.');
 					} finally {
@@ -163,7 +165,10 @@ export default function FooterActions() {
 				</a>
 				<button
 					type="button"
-					onClick={() => setActiveAction('resume')}
+					onClick={() => {
+						setResumeError(null);
+						setActiveAction('resume');
+					}}
 					className={buttonClass}
 					disabled={resumeLoading}
 					aria-label="Download resume"
@@ -189,6 +194,11 @@ export default function FooterActions() {
 					{resumeLoading && (
 						<span className="text-xs text-white/60">Preparing download…</span>
 					)}
+					{resumeError && (
+						<p className="text-xs text-amber-300/90" role="alert">
+							{resumeError}
+						</p>
+					)}
 				</div>
 			)}
 			{activeAction === 'email' && (
@@ -203,7 +213,7 @@ export default function FooterActions() {
 						</p>
 					)}
 					{contactEmail !== null && contactEmail !== '' && (
-						<div className="flex items-center gap-2">
+						<div className="flex flex-wrap items-center justify-center gap-2">
 							<code className="rounded bg-white/10 px-2 py-1 text-sm text-white/90">
 								{contactEmail}
 							</code>
@@ -214,6 +224,14 @@ export default function FooterActions() {
 								onClick={copyContact}
 							>
 								Copy
+							</Button>
+							<Button
+								variant="ghost"
+								size="sm"
+								className="text-white/80 hover:text-white"
+								onClick={() => setActiveAction(null)}
+							>
+								Close
 							</Button>
 						</div>
 					)}
