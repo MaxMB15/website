@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prebuild": "mkdir -p netlify/functions/verify-resume && cp public/resume.pdf netlify/functions/verify-resume/resume.pdf",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,6 +13,7 @@
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-tabs": "^1.1.2",
+    "axios": "^1.13.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.5.1",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@netlify/functions": "^5.1.2",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { Linkedin, Github } from 'lucide-react';
+import FooterActions from './FooterActions';
 
 const Footer = () => {
 	const year = new Date().getFullYear();
@@ -17,29 +16,7 @@ const Footer = () => {
 					Made by Me — no templates, no stock. All photos
 					are mine.
 				</p>
-				<nav
-					className="flex items-center justify-center gap-6 pt-2"
-					aria-label="Social links"
-				>
-					<a
-						href="https://www.linkedin.com/in/maxboksem"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-					>
-						<Linkedin size={20} aria-hidden />
-						<span>LinkedIn</span>
-					</a>
-					<a
-						href="https://github.com/MaxMB15"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-					>
-						<Github size={20} aria-hidden />
-						<span>GitHub</span>
-					</a>
-				</nav>
+				<FooterActions />
 			</div>
 		</footer>
 	);

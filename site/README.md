@@ -51,9 +51,16 @@ npm run lint
 2. Build settings are in `netlify.toml`:
    - **Build command**: `npm run build`
    - **Publish directory**: `out`
-3. Optional: set `NEXT_PUBLIC_SITE_URL` to your production URL (e.g. `https://yoursite.com`) for correct sitemap/OG URLs.
+   - **Functions**: `netlify/functions`
+3. **Environment variables** (in Netlify dashboard → Site settings → Environment variables):
+   - `NEXT_PUBLIC_SITE_URL` (optional): Production URL (e.g. `https://yoursite.com`) for sitemap/OG URLs.
+   - **Footer resume & contact (Turnstile)**:
+     - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`: Cloudflare Turnstile site key (public).
+     - `TURNSTILE_SECRET_KEY`: Cloudflare Turnstile secret key (server-only; used by Netlify functions).
+     - `CONTACT_EMAIL`: Email returned by “Get contact info” after verification (server-only).
+   - **Cloudflare Web Analytics** (optional): `NEXT_PUBLIC_CF_BEACON_TOKEN` — add your beacon token from Cloudflare Web Analytics to enable tracking.
 
-No extra config needed; the project is built as a static export.
+Before each build, `prebuild` copies `public/resume.pdf` into `netlify/functions/verify-resume/` so the resume download function can serve it. The downloaded file is named **Max_Boksem_Resume.pdf** (custom filename set in the function).
 
 ## Project Structure
 

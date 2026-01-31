@@ -111,6 +111,15 @@ export default function RootLayout({
 				</a>
 				<Navbar />
 				{children}
+				{process.env.NEXT_PUBLIC_CF_BEACON_TOKEN && (
+					<script
+						defer
+						src="https://static.cloudflareinsights.com/beacon.min.js"
+						data-cf-beacon={JSON.stringify({
+							token: process.env.NEXT_PUBLIC_CF_BEACON_TOKEN,
+						})}
+					/>
+				)}
 			</body>
 		</html>
 	);
