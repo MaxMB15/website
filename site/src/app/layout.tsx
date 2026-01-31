@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://maxboksem.com';
-const defaultTitle = 'Max Boksem - Software Engineer & Researcher';
+const defaultTitle = 'Max Boksem';
 const defaultDescription =
 	'Personal website of Max Boksem. Software Engineer, Developer, and Researcher.';
 
@@ -45,11 +45,20 @@ export const metadata: Metadata = {
 		siteName: 'Max Boksem',
 		title: defaultTitle,
 		description: defaultDescription,
+		images: [
+			{
+				url: '/images/og-image.png',
+				width: 1200,
+				height: 630,
+				alt: 'Max Boksem',
+			},
+		],
 	},
 	twitter: {
 		card: 'summary_large_image',
 		title: defaultTitle,
 		description: defaultDescription,
+		images: ['/images/og-image.png'],
 	},
 	robots: {
 		index: true,
