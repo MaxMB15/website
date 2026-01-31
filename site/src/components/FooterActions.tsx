@@ -51,54 +51,63 @@ export default function FooterActions() {
 	useEffect(() => {
 		if (!scriptReady || !siteKey || !window.turnstile || !activeAction) return;
 
-		if (activeAction === 'resume') {
-			resumeWidgetId.current = window.turnstile.render('#turnstile-resume', {
-				sitekey: siteKey,
-				theme: 'auto',
-				callback: async (token: string) => {
-					setResumeLoading(true);
-					setResumeError(null);
-					try {
-						const blob = await verifyResume(token);
-						const url = URL.createObjectURL(blob);
-						const a = document.createElement('a');
-						a.href = url;
-						a.download = RESUME_FILENAME;
-						a.click();
-						URL.revokeObjectURL(url);
-						if (resumeWidgetId.current != null)
-							window.turnstile?.reset(resumeWidgetId.current);
-						setActiveAction(null);
-					} catch (err) {
-						setResumeError(
-							err instanceof Error ? err.message : 'Download failed. Please try again.'
-						);
-					} finally {
-						setResumeLoading(false);
-					}
-				},
-			});
-		} else if (activeAction === 'email') {
-			setContactError(null);
-			setContactEmail(null);
-			contactWidgetId.current = window.turnstile.render('#turnstile-contact', {
-				sitekey: siteKey,
-				theme: 'auto',
-				callback: async (token: string) => {
-					setContactLoading(true);
-					try {
-						const data = await verifyContact(token);
-						setContactEmail(data.email ?? '');
-						if (contactWidgetId.current != null)
-							window.turnstile?.reset(contactWidgetId.current);
-					} catch {
-						setContactError('Something went wrong. Please try again.');
-					} finally {
-						setContactLoading(false);
-					}
-				},
-			});
-		}
+		const id = requestAnimationFrame(() => {
+			const turnstile = window.turnstile;
+			if (!turnstile) return;
+			if (activeAction === 'resume') {
+				const container = document.getElementById('turnstile-resume');
+				if (!container) return;
+				resumeWidgetId.current = turnstile.render(container, {
+					sitekey: siteKey,
+					theme: 'auto',
+					callback: async (token: string) => {
+						setResumeLoading(true);
+						setResumeError(null);
+						try {
+							const blob = await verifyResume(token);
+							const url = URL.createObjectURL(blob);
+							const a = document.createElement('a');
+							a.href = url;
+							a.download = RESUME_FILENAME;
+							a.click();
+							URL.revokeObjectURL(url);
+							if (resumeWidgetId.current != null)
+								window.turnstile?.reset(resumeWidgetId.current);
+							setActiveAction(null);
+						} catch (err) {
+							setResumeError(
+								err instanceof Error ? err.message : 'Download failed. Please try again.'
+							);
+						} finally {
+							setResumeLoading(false);
+						}
+					},
+				});
+			} else if (activeAction === 'email') {
+				setContactError(null);
+				setContactEmail(null);
+				const container = document.getElementById('turnstile-contact');
+				if (!container) return;
+				contactWidgetId.current = turnstile.render(container, {
+					sitekey: siteKey,
+					theme: 'auto',
+					callback: async (token: string) => {
+						setContactLoading(true);
+						try {
+							const data = await verifyContact(token);
+							setContactEmail(data.email ?? '');
+							if (contactWidgetId.current != null)
+								window.turnstile?.reset(contactWidgetId.current);
+						} catch {
+							setContactError('Something went wrong. Please try again.');
+						} finally {
+							setContactLoading(false);
+						}
+					},
+				});
+			}
+		});
+		return () => cancelAnimationFrame(id);
 	}, [activeAction, scriptReady, siteKey]);
 
 	const copyContact = useCallback(() => {
