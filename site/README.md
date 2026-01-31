@@ -47,6 +47,8 @@ npm run lint
 
 ## Deployment (Netlify)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/df5dc8f5-eff1-4702-b74f-a50dc86b379e/deploy-status)](https://app.netlify.com/projects/maxboksem/deploys)
+
 1. Connect the repo to Netlify.
 2. Build settings are in `netlify.toml`:
    - **Build command**: `npm run build`
