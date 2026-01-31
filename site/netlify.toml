@@ -6,6 +6,10 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Include resume.pdf in the verify-resume function bundle (prebuild copies it to netlify/functions/verify-resume/)
+[functions]
+  included_files = ["./netlify/functions/verify-resume/resume.pdf"]
+
 # Security and caching headers
 [[headers]]
   for = "/*"

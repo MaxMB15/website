@@ -60,6 +60,8 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
 		path.join(__dirname, '..', 'resume.pdf'),
 		path.join(process.cwd(), 'resume.pdf'),
 		path.join(process.cwd(), 'verify-resume', 'resume.pdf'),
+		path.join(process.cwd(), 'netlify', 'functions', 'verify-resume', 'resume.pdf'),
+		path.resolve('netlify/functions/verify-resume/resume.pdf'),
 	];
 	let resumePath: string | null = null;
 	for (const p of possiblePaths) {
