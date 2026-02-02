@@ -42,6 +42,8 @@ export const programmingLanguages: SkillItem[] = sortByProficiency([
 	{ name: 'Java', proficiency: 'expert' },
 	{ name: 'HTML / CSS', proficiency: 'proficient' },
 	{ name: 'PHP', proficiency: 'basic' },
+	{ name: 'Swift', proficiency: 'intermediate' },
+	{ name: 'x64 Assembly', proficiency: 'intermediate' },
 ]);
 
 export const technologies: SkillItem[] = sortByProficiency([
@@ -66,7 +68,6 @@ export const tools: SkillItem[] = sortByProficiency([
 	{ name: 'Unity', proficiency: 'intermediate' },
 	{ name: 'Cursor', proficiency: 'intermediate' },
 	{ name: 'JetBrains IDEs', proficiency: 'proficient' },
-	{ name: 'pyATS', proficiency: 'intermediate' },
 ]);
 
 export const concepts: SkillItem[] = sortByProficiency([
