@@ -56,6 +56,9 @@ export const technologies: SkillItem[] = sortByProficiency([
 	{ name: 'MySQL', proficiency: 'proficient' },
 	{ name: 'PostgreSQL', proficiency: 'proficient' },
 	{ name: 'MongoDB', proficiency: 'proficient' },
+	{ name: 'Ansible', proficiency: 'intermediate' },
+	{ name: 'Terraform', proficiency: 'basic' },
+	{ name: 'GitHub Actions', proficiency: 'intermediate' },
 ]);
 
 export const tools: SkillItem[] = sortByProficiency([
