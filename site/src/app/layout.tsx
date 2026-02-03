@@ -72,6 +72,11 @@ export const metadata: Metadata = {
 		icon: '/favicon.ico',
 		apple: '/apple-touch-icon.png',
 	},
+	verification: {
+		other: {
+			'msvalidate.01': 'F693F808EEFEED9C116DB14CFB6D0E21',
+		},
+	},
 };
 
 export const viewport: Viewport = {
