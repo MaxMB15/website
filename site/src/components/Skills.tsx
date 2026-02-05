@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import {
 	programmingLanguages,
 	technologies,
+	infraDevOps,
 	tools,
 	concepts,
 	languages,
@@ -15,6 +16,7 @@ import type { LanguageItem, SkillItem } from '@/lib/skills';
 const skillCategories = [
 	{ title: 'Programming Languages', items: programmingLanguages, isLanguage: false },
 	{ title: 'Technologies', items: technologies, isLanguage: false },
+	{ title: 'Infra / DevOps / CI/CD', items: infraDevOps, isLanguage: false },
 	{ title: 'Tools', items: tools, isLanguage: false },
 	{ title: 'Concepts', items: concepts, isLanguage: false },
 	{ title: 'Languages', items: languages, isLanguage: true },

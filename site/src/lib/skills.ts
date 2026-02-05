@@ -44,31 +44,39 @@ export const programmingLanguages: SkillItem[] = sortByProficiency([
 	{ name: 'PHP', proficiency: 'basic' },
 	{ name: 'Swift', proficiency: 'intermediate' },
 	{ name: 'x64 Assembly', proficiency: 'intermediate' },
+	{ name: 'Bash', proficiency: 'proficient' },
 ]);
 
+// Frameworks, runtimes, databases, app platforms (not infra/DevOps).
 export const technologies: SkillItem[] = sortByProficiency([
 	{ name: 'React', proficiency: 'proficient' },
 	{ name: 'Tailwind', proficiency: 'intermediate' },
 	{ name: 'Node.js', proficiency: 'proficient' },
 	{ name: 'Express', proficiency: 'proficient' },
 	{ name: 'Electron', proficiency: 'intermediate' },
+	{ name: 'Unity', proficiency: 'intermediate' },
 	{ name: 'SQL', proficiency: 'proficient' },
 	{ name: 'MySQL', proficiency: 'proficient' },
 	{ name: 'PostgreSQL', proficiency: 'proficient' },
 	{ name: 'MongoDB', proficiency: 'proficient' },
+	{ name: 'Kafka', proficiency: 'intermediate' },
+]);
+
+// Containers, cloud, IaC, CI/CD.
+export const infraDevOps: SkillItem[] = sortByProficiency([
+	{ name: 'Docker', proficiency: 'intermediate' },
+	{ name: 'Kubernetes', proficiency: 'intermediate' },
+	{ name: 'AWS', proficiency: 'intermediate' },
 	{ name: 'Ansible', proficiency: 'intermediate' },
 	{ name: 'Terraform', proficiency: 'basic' },
 	{ name: 'GitHub Actions', proficiency: 'intermediate' },
+	{ name: 'Jenkins', proficiency: 'proficient' },
 ]);
 
 export const tools: SkillItem[] = sortByProficiency([
 	{ name: 'Git', proficiency: 'proficient' },
-	{ name: 'Docker', proficiency: 'intermediate' },
-	{ name: 'Kubernetes', proficiency: 'intermediate' },
-	{ name: 'AWS', proficiency: 'intermediate' },
 	{ name: 'Unix', proficiency: 'proficient' },
 	{ name: 'VSCode (Studio)', proficiency: 'proficient' },
-	{ name: 'Unity', proficiency: 'intermediate' },
 	{ name: 'Cursor', proficiency: 'intermediate' },
 	{ name: 'JetBrains IDEs', proficiency: 'proficient' },
 ]);

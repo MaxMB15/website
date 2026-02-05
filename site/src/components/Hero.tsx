@@ -126,7 +126,7 @@ const Hero = () => {
 					<div className="relative z-10">
 						<FadeInText
 							text="Max Boksem"
-							className="text-6xl font-bold mb-4 text-white text-center"
+							className="hero-title font-bold mb-4 text-white text-center"
 						/>
 						<AnimatePresence mode="wait">
 							<motion.div
@@ -138,7 +138,7 @@ const Hero = () => {
 							>
 								<FadeInText
 									text={heroSubheaders[currentSubheader]}
-									className="text-2xl text-white text-center"
+									className="hero-subtitle text-white text-center"
 								/>
 							</motion.div>
 						</AnimatePresence>

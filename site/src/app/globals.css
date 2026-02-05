@@ -101,6 +101,18 @@ body {
     @apply bg-white rounded shadow-lg outline-none ring-2 ring-gray-800;
   }
 
+  /* Hero: fluid typography so text scales down on very narrow screens */
+  .hero-title {
+    font-size: clamp(1.125rem, 5vw + 1.5rem, 3.75rem);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .hero-subtitle {
+    font-size: clamp(0.75rem, 2vw + 0.75rem, 1.5rem);
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
   /* About Me: text wraps around image on desktop (float inside same block as text) */
   .about-me-flow {
     display: block;
