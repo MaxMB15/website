@@ -31,6 +31,7 @@ function sortByProficiency<T extends SkillItem>(items: T[]): T[] {
 	});
 }
 
+// Programming languages.
 export const programmingLanguages: SkillItem[] = sortByProficiency([
 	{ name: 'Rust', proficiency: 'intermediate' },
 	{ name: 'TypeScript / JavaScript', proficiency: 'proficient' },
@@ -81,6 +82,7 @@ export const tools: SkillItem[] = sortByProficiency([
 	{ name: 'JetBrains IDEs', proficiency: 'proficient' },
 ]);
 
+// Concepts.
 export const concepts: SkillItem[] = sortByProficiency([
 	{ name: 'REST APIs', proficiency: 'proficient' },
 	{ name: 'RPC APIs', proficiency: 'proficient' },
@@ -100,6 +102,7 @@ export const concepts: SkillItem[] = sortByProficiency([
 	{ name: 'Cloud Computing', proficiency: 'intermediate' },
 ]);
 
+// Spoken Languages.
 export const languages: LanguageItem[] = [
 	{ name: 'English', level: 'native' },
 	{ name: 'Dutch', level: 'intermediate' },
