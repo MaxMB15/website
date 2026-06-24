@@ -78,14 +78,17 @@ body {
        hero at the top and the footer at the bottom) instead of white. */
     overscroll-behavior-y: none;
     background-color: var(--footer-bg);
-    overflow-x: hidden;
+    /* `clip` (not `hidden`) prevents horizontal bleed WITHOUT turning overflow-y
+       into `auto`. Using `hidden` on both html and body makes each its own
+       vertical scroll container -> two scrollbars + jammed nested scrolling. */
+    overflow-x: clip;
     /* Anchor links land below the fixed navbar instead of under it. */
     scroll-padding-top: 5rem;
   }
   body {
     overscroll-behavior-y: none;
     background-color: var(--page-bg);
-    overflow-x: hidden;
+    overflow-x: clip;
     @apply text-foreground;
 	}
 }
