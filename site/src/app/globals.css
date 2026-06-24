@@ -71,16 +71,39 @@ body {
     @apply border-border;
 	}
   html {
-    overscroll-behavior: none;
-    background-color: var(--page-bg);
+    /* Kill the overscroll "rubber-band" bounce so the light page background can
+       never flash past the top or bottom of the page (Android Chrome / iOS).
+       The root background is set to the dark footer tone so that in the rare
+       case a browser still overscrolls, the revealed band is dark (matching the
+       hero at the top and the footer at the bottom) instead of white. */
+    overscroll-behavior-y: none;
+    background-color: var(--footer-bg);
     overflow-x: hidden;
+    /* Anchor links land below the fixed navbar instead of under it. */
+    scroll-padding-top: 5rem;
   }
   body {
-    overscroll-behavior: none;
+    overscroll-behavior-y: none;
     background-color: var(--page-bg);
     overflow-x: hidden;
     @apply text-foreground;
 	}
+}
+
+/* Honor users who ask for less motion: neutralize CSS animation/transition and
+   smooth scrolling. JS (framer-motion) animations are gated separately via
+   useReducedMotion in each component. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @layer components {
@@ -113,6 +136,75 @@ body {
     white-space: nowrap;
   }
 
+  /* Footer: band below the fold so overscroll at bottom shows footer color (no extra scroll). */
+  .footer-overscroll {
+    position: relative;
+    overflow: visible;
+  }
+  .footer-overscroll::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 50vh;
+    background: var(--footer-bg);
+    pointer-events: none;
+  }
+
+  /* Spotlight that follows the cursor across project cards (driven by --mx/--my). */
+  .spotlight-card {
+    position: relative;
+  }
+  .spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      18rem 18rem at var(--mx, 50%) var(--my, 0%),
+      rgb(58 123 244 / 0.9),
+      transparent 60%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Shimmer for loading skeletons. */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(0 0 0 / 0.06);
+  }
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(255 255 255 / 0.65),
+      transparent
+    );
+    animation: skeleton-shimmer 1.4s infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton::after {
+      animation: none;
+    }
+  }
+
   /* About Me: text wraps around image on desktop (float inside same block as text) */
   .about-me-flow {
     display: block;
@@ -129,5 +221,11 @@ body {
     .about-me-text {
       overflow: visible;
     }
+  }
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }

@@ -4,7 +4,7 @@ const Footer = () => {
 	const year = new Date().getFullYear();
 	return (
 		<footer
-			className="text-white py-10 px-4"
+			className="footer-overscroll text-white py-10 px-4"
 			style={{ backgroundColor: 'var(--footer-bg)' }}
 			role="contentinfo"
 		>

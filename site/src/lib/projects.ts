@@ -1,4 +1,29 @@
-export const projects = [
+export interface Project {
+	title: string;
+	description: string;
+	image: string;
+	href: string;
+	/** Tech stack chips shown on the project card. */
+	tags?: string[];
+}
+
+export const projects: Project[] = [
+	{
+		title: 'MaxLango',
+		description:
+			'A cross-platform, offline-first language-learning app with spaced repetition, built on Tauri 2 and a pure-Rust kernel.',
+		image: '/images/projects/maxlango.webp',
+		href: 'https://github.com/MaxMB15/MaxLango',
+		tags: ['Tauri 2', 'Rust', 'React', 'TypeScript'],
+	},
+	{
+		title: 'MaxVideoPlayer',
+		description:
+			'A cross-platform IPTV player built with Tauri 2, React, and libmpv, with hardware-accelerated playback and M3U, Xtream Codes, and EPG support.',
+		image: '/images/projects/maxvideoplayer.webp',
+		href: 'https://github.com/MaxMB15/MaxVideoPlayer',
+		tags: ['Tauri 2', 'Rust', 'React', 'libmpv'],
+	},
 	{
 		title: 'Incremental Graph Code (IGC)',
 		description:

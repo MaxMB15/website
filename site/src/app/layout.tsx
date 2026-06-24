@@ -95,7 +95,7 @@ export default function RootLayout({
 }>) {
 	const structuredData = getPersonStructuredData();
 	return (
-		<html lang="en" className="scroll-smooth top-1">
+		<html lang="en" className="scroll-smooth">
 			<head>
 				<link
 					rel="preload"
