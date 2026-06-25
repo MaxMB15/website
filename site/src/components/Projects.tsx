@@ -11,7 +11,7 @@ import { Reveal } from '@/components/motion/Reveal'
 
 const Projects = () => {
   return (
-    <section id="projects" className="section-angle-top py-20 bg-gray-50">
+    <section id="projects" className="section-angle-top py-20 bg-white">
       <div className="container mx-auto px-4">
         <Reveal className="mb-12">
           <h2 className="text-4xl font-bold text-center">Projects</h2>

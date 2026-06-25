@@ -13,7 +13,7 @@ const Experience = () => {
   const displayedExperiences = isExpanded ? experiences : experiences.slice(0, 3);
 
   return (
-    <section id="experience" className="section-angle-top py-20 bg-white">
+    <section id="experience" className="section-angle-top py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-12 text-center">
           Experience
