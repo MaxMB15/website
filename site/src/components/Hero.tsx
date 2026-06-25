@@ -6,6 +6,7 @@ import {
 	AnimatePresence,
 	useScroll,
 	useTransform,
+	useReducedMotion,
 } from 'framer-motion';
 import Image from 'next/image';
 import FadeInText from './FadeInText';
@@ -21,6 +22,7 @@ const Hero = () => {
 	const [heroImageReady, setHeroImageReady] = useState(false);
 	const [nextImageLoaded, setNextImageLoaded] = useState(false);
 	const nextImageLoadedRef = useRef(false);
+	const reduceMotion = useReducedMotion();
 	const sectionRef = useRef(null);
 	const { scrollYProgress } = useScroll({
 		target: sectionRef,
@@ -54,7 +56,7 @@ const Hero = () => {
 		<section
 			ref={sectionRef}
 			id="hero"
-			className="relative h-screen overflow-hidden"
+			className="relative min-h-[112vh] -mt-[12vh] pt-[12vh] overflow-hidden"
 		>
 			{/* Placeholder until first hero image has loaded (avoids buffering flash). */}
 			{!heroImageReady && (
@@ -161,6 +163,26 @@ const Hero = () => {
 						{heroImages[currentImage].caption}
 					</motion.div>
 				</AnimatePresence>
+			</motion.div>
+			{/* Scroll cue: animated mouse that fades out as you scroll past the hero. */}
+			<motion.div
+				className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 pointer-events-none"
+				style={{ opacity: textOpacity }}
+				aria-hidden
+			>
+				<div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/70 p-1.5">
+					<motion.span
+						className="block h-2 w-1 rounded-full bg-white/90"
+						animate={
+							reduceMotion ? undefined : { opacity: [0.9, 0.3, 0.9] }
+						}
+						transition={{
+							duration: 2.4,
+							repeat: Infinity,
+							ease: 'easeInOut',
+						}}
+					/>
+				</div>
 			</motion.div>
 		</section>
 	);

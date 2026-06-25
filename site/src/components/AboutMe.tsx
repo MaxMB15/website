@@ -23,7 +23,7 @@ const AboutMe = () => {
 	const [expanded, setExpanded] = useState(false);
 
 	return (
-		<section id="about" className="py-20 bg-gray-50">
+		<section id="about" className="py-20 bg-white">
 			<div className="container mx-auto px-4">
 				<h2 className="text-4xl font-bold mb-12 text-center">
 					About Me

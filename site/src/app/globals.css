@@ -71,16 +71,42 @@ body {
     @apply border-border;
 	}
   html {
-    overscroll-behavior: none;
-    background-color: var(--page-bg);
-    overflow-x: hidden;
+    /* Kill the overscroll "rubber-band" bounce so the light page background can
+       never flash past the top or bottom of the page (Android Chrome / iOS).
+       The root background is set to the dark footer tone so that in the rare
+       case a browser still overscrolls, the revealed band is dark (matching the
+       hero at the top and the footer at the bottom) instead of white. */
+    overscroll-behavior-y: none;
+    background-color: var(--footer-bg);
+    /* `clip` (not `hidden`) prevents horizontal bleed WITHOUT turning overflow-y
+       into `auto`. Using `hidden` on both html and body makes each its own
+       vertical scroll container -> two scrollbars + jammed nested scrolling. */
+    overflow-x: clip;
+    /* Anchor links land below the fixed navbar instead of under it. */
+    scroll-padding-top: 5rem;
   }
   body {
-    overscroll-behavior: none;
+    overscroll-behavior-y: none;
     background-color: var(--page-bg);
-    overflow-x: hidden;
+    overflow-x: clip;
     @apply text-foreground;
 	}
+}
+
+/* Honor users who ask for less motion: neutralize CSS animation/transition and
+   smooth scrolling. JS (framer-motion) animations are gated separately via
+   useReducedMotion in each component. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @layer components {
@@ -113,6 +139,59 @@ body {
     white-space: nowrap;
   }
 
+  /* Footer: band below the fold so overscroll at bottom shows footer color (no extra scroll). */
+  .footer-overscroll {
+    position: relative;
+    overflow: visible;
+  }
+  .footer-overscroll::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 50vh;
+    background: var(--footer-bg);
+    pointer-events: none;
+  }
+
+  /* Angled section seams: each section's top edge is a shallow diagonal with a
+     subtle shadow line, giving a "slight edge" between sections instead of a
+     flat horizontal color change. The drop-shadow follows the clipped diagonal,
+     so the edge reads regardless of the two sections' background colors. */
+  .section-angle-top {
+    --angle-h: clamp(20px, 2.4vw, 48px);
+    margin-top: calc(var(--angle-h) * -1);
+    clip-path: polygon(0 var(--angle-h), 100% 0, 100% 100%, 0 100%);
+    filter: drop-shadow(0 -1px 0 rgb(15 23 42 / 0.07))
+      drop-shadow(0 -10px 14px rgb(15 23 42 / 0.045));
+  }
+
+  /* Shimmer for loading skeletons. */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(0 0 0 / 0.06);
+  }
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(255 255 255 / 0.65),
+      transparent
+    );
+    animation: skeleton-shimmer 1.4s infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton::after {
+      animation: none;
+    }
+  }
+
   /* About Me: text wraps around image on desktop (float inside same block as text) */
   .about-me-flow {
     display: block;
@@ -129,5 +208,11 @@ body {
     .about-me-text {
       overflow: visible;
     }
+  }
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }

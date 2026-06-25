@@ -13,7 +13,7 @@ const Experience = () => {
   const displayedExperiences = isExpanded ? experiences : experiences.slice(0, 3);
 
   return (
-    <section id="experience" className="py-20 bg-white">
+    <section id="experience" className="section-angle-top py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-12 text-center">
           Experience
@@ -23,10 +23,10 @@ const Experience = () => {
             {displayedExperiences.map((exp, index) => (
               <motion.div
                 key={exp.title}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
               >
                 <Card className="mb-8 overflow-hidden">
                   <CardHeader className="flex flex-row items-center gap-4">
@@ -54,27 +54,9 @@ const Experience = () => {
                   </CardContent>
                 </Card>
                 {index < displayedExperiences.length - 1 && (
-                  <motion.div
-                    className="flex justify-center my-4"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      duration: 0.5,
-                      delay: index * 0.1 + 0.3,
-                    }}
-                  >
-                    <motion.div
-                      animate={{
-                        y: [0, 10, 0],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="w-0.5 h-8 bg-gradient-to-b from-[rgb(58,123,244)] to-transparent"
-                    />
-                  </motion.div>
+                  <div className="flex justify-center my-4" aria-hidden>
+                    <span className="block w-0.5 h-8 bg-gradient-to-b from-[rgb(58,123,244)] to-transparent" />
+                  </div>
                 )}
               </motion.div>
             ))}
