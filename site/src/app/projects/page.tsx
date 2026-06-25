@@ -4,7 +4,6 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { projects } from '@/lib/projects';
 import { ProjectCard } from '@/components/ProjectCard';
-import { MagneticButton } from '@/components/motion/MagneticButton';
 import { Reveal } from '@/components/motion/Reveal';
 import { getProjectsStructuredData } from '@/lib/structured-data';
 
@@ -53,15 +52,13 @@ const ProjectsPage = () => {
 					))}
 				</div>
 				<div className="mt-12 text-center">
-					<MagneticButton>
-						<Button
-							asChild
-							variant="outline"
-							className="border-[rgb(58,123,244)] text-[rgb(58,123,244)] hover:bg-[rgb(58,123,244)] hover:text-white"
-						>
-							<Link href="/">Back to Home</Link>
-						</Button>
-					</MagneticButton>
+					<Button
+						asChild
+						variant="outline"
+						className="border-[rgb(58,123,244)] text-[rgb(58,123,244)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[rgb(58,123,244)] hover:text-white hover:shadow-md"
+					>
+						<Link href="/">Back to Home</Link>
+					</Button>
 				</div>
 			</div>
 			<Footer />

@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { EASE_OUT } from '@/lib/motion';
-import { MagneticButton } from '@/components/motion/MagneticButton';
 import { Button } from '@/components/ui/button';
 
 export default function NotFound() {
@@ -49,23 +48,19 @@ export default function NotFound() {
 				transition={{ duration: 0.6, delay: 0.24, ease: EASE_OUT }}
 				className="mt-8 flex flex-wrap items-center justify-center gap-4"
 			>
-				<MagneticButton>
-					<Button
-						asChild
-						className="bg-[rgb(58,123,244)] text-white hover:bg-[rgb(48,108,224)]"
-					>
-						<Link href="/">Back to Home</Link>
-					</Button>
-				</MagneticButton>
-				<MagneticButton>
-					<Button
-						asChild
-						variant="outline"
-						className="border-[rgb(58,123,244)] text-[rgb(58,123,244)] hover:bg-[rgb(58,123,244)] hover:text-white"
-					>
-						<Link href="/projects">View Projects</Link>
-					</Button>
-				</MagneticButton>
+				<Button
+					asChild
+					className="bg-[rgb(58,123,244)] text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[rgb(48,108,224)] hover:shadow-md"
+				>
+					<Link href="/">Back to Home</Link>
+				</Button>
+				<Button
+					asChild
+					variant="outline"
+					className="border-[rgb(58,123,244)] text-[rgb(58,123,244)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[rgb(58,123,244)] hover:text-white hover:shadow-md"
+				>
+					<Link href="/projects">View Projects</Link>
+				</Button>
 			</motion.div>
 		</main>
 	);

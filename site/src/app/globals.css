@@ -155,32 +155,16 @@ body {
     pointer-events: none;
   }
 
-  /* Spotlight that follows the cursor across project cards (driven by --mx/--my). */
-  .spotlight-card {
-    position: relative;
-  }
-  .spotlight-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: radial-gradient(
-      18rem 18rem at var(--mx, 50%) var(--my, 0%),
-      rgb(58 123 244 / 0.9),
-      transparent 60%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-  .spotlight-card:hover::before {
-    opacity: 1;
+  /* Angled section seams: each section's top edge is a shallow diagonal with a
+     subtle shadow line, giving a "slight edge" between sections instead of a
+     flat horizontal color change. The drop-shadow follows the clipped diagonal,
+     so the edge reads regardless of the two sections' background colors. */
+  .section-angle-top {
+    --angle-h: clamp(20px, 2.4vw, 48px);
+    margin-top: calc(var(--angle-h) * -1);
+    clip-path: polygon(0 var(--angle-h), 100% 0, 100% 100%, 0 100%);
+    filter: drop-shadow(0 -1px 0 rgb(15 23 42 / 0.07))
+      drop-shadow(0 -10px 14px rgb(15 23 42 / 0.045));
   }
 
   /* Shimmer for loading skeletons. */

@@ -8,11 +8,10 @@ import Image from 'next/image'
 import Autoplay from 'embla-carousel-autoplay'
 import { projects } from '@/lib/projects'
 import { Reveal } from '@/components/motion/Reveal'
-import { MagneticButton } from '@/components/motion/MagneticButton'
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-20 bg-white">
+    <section id="projects" className="section-angle-top py-20 bg-white">
       <div className="container mx-auto px-4">
         <Reveal className="mb-12">
           <h2 className="text-4xl font-bold text-center">Projects</h2>
@@ -66,15 +65,13 @@ const Projects = () => {
           <CarouselNext />
         </Carousel>
         <div className="mt-12 text-center">
-          <MagneticButton>
-            <Button
-              asChild
-              variant="outline"
-              className="border-[rgb(58,123,244)] text-[rgb(58,123,244)] hover:bg-[rgb(58,123,244)] hover:text-white"
-            >
-              <Link href="/projects">More Projects</Link>
-            </Button>
-          </MagneticButton>
+          <Button
+            asChild
+            variant="outline"
+            className="border-[rgb(58,123,244)] text-[rgb(58,123,244)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[rgb(58,123,244)] hover:text-white hover:shadow-md"
+          >
+            <Link href="/projects">More Projects</Link>
+          </Button>
         </div>
       </div>
     </section>

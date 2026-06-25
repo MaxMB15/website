@@ -174,12 +174,10 @@ const Hero = () => {
 					<motion.span
 						className="block h-2 w-1 rounded-full bg-white/90"
 						animate={
-							reduceMotion
-								? undefined
-								: { y: [0, 8, 0], opacity: [1, 0.4, 1] }
+							reduceMotion ? undefined : { opacity: [0.9, 0.3, 0.9] }
 						}
 						transition={{
-							duration: 1.8,
+							duration: 2.4,
 							repeat: Infinity,
 							ease: 'easeInOut',
 						}}
