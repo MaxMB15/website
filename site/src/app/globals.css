@@ -139,22 +139,6 @@ body {
     white-space: nowrap;
   }
 
-  /* Footer: band below the fold so overscroll at bottom shows footer color (no extra scroll). */
-  .footer-overscroll {
-    position: relative;
-    overflow: visible;
-  }
-  .footer-overscroll::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    height: 50vh;
-    background: var(--footer-bg);
-    pointer-events: none;
-  }
-
   /* Angled section seams: each section's top edge is a shallow diagonal with a
      subtle shadow line, giving a "slight edge" between sections instead of a
      flat horizontal color change. The drop-shadow follows the clipped diagonal,
